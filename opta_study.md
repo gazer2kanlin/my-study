@@ -137,16 +137,15 @@ V1 --> C1 -.-> C2 -.-> C3
 classDiagram
 Standstill <|.. Equipment
 Standstill <.. SFC
-Equipment --o Mask
 SFC ..|> Standstill
 SFC ..> Equipment : sourceVariableName="previousStandstill"
 SFC ..> SFC : sourceVariableName="previousStandstill"
 Equipment ..> SFC : sourceVariableName="previousStandstill"
+SFC ..> Mask
 
 <<PlanningEntity>> SFC
 <<PlanningEntity>> Standstill
 <<PlanningEntity>> Equipment
-<<PlanningEntity>> Mask
 
 Standstill: Equipment getEquipment()
 Standstill: SFC getNextSFC()
@@ -158,7 +157,8 @@ SFC: @PlanningVariable Standstill previousStandstill
 SFC: @InverseRelationShadowVariable SFC nextSFC
 SFC: @AnchorShadowVariable Equipment equipment
 
-Mask: @PlanningVariable Equipment equipment
+Mask: String id
+Mask: String initEquipId
 
 Equipment: @InverseRelationShadowVariable SFC nextSFC
 Equipment: @InverseRelationShadowVariable List~Mask~ maskList
